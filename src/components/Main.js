@@ -11,10 +11,16 @@ class Main extends Component {
     super();
     this.state = {
       satInfo: null,
+      satList: null,
+      setting: null,
       isLoadingList: false,
     };
   }
   showNearbySatellite = (setting) => {
+    this.setState({
+      isLoadingList: true,
+      setting: setting,
+    });
     this.fetchSatellite(setting);
   };
 
@@ -37,24 +43,33 @@ class Main extends Component {
       })
       .catch((error) => {
         console.log("err in fetch satellite -> ", error);
+        this.setState({
+          isLoadingList: false,
+        });
       });
   };
 
-  showMap = () => {
-    console.log("show on the map");
+  showMap = (selected) => {
+    this.setState((preState) => ({
+      ...preState,
+      satList: [...selected],
+    }));
   };
 
   render() {
-    const { satInfo } = this.state;
+    const { isLoadingList, satInfo, satList, setting } = this.state;
     return (
       <Row className="main">
         <Col span={8} className="left-side">
           <SatSetting onShow={this.showNearbySatellite} />
-          <SatelliteList satInfo={satInfo} onShowMap={this.showMap} isLoad={this.state.isLoadingList}
- />
+          <SatelliteList
+            isLoad={isLoadingList}
+            satInfo={satInfo}
+            onShowMap={this.showMap}
+          />
         </Col>
         <Col span={16} className="right-side">
-          <WorldMap />
+          <WorldMap satData={satList} observerData={setting} />
         </Col>
       </Row>
     );

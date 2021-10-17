@@ -110,6 +110,7 @@ class SatSettingForm extends Component {
        this.props.form.validateFields((err, values) => {
            if (!err) {
                console.log('Received values of form: ', values);
+               // 把value 变成 parent里的 setting
                this.props.onShow(values);
            }
        });
