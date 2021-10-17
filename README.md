@@ -1,3 +1,17 @@
+# You need add constaints.js file to include the constants below inorder to properly run this application
+
+
+export const SAT_API_KEY = "your api key from n2yo.com ";
+
+export const STARLINK_CATEGORY = "52";
+
+export const NEARBY_SATELLITE = "rest/v1/satellite/above";
+
+export const WORLD_MAP_URL = "https://unpkg.com/world-atlas@1/world/110m.json";
+
+export const SATELLITE_POSITION_URL = "rest/v1/satellite/positions";
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
